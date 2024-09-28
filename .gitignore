@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+.mxproject
+.Project.uvoptx
+.Project.uvguix.Jain
