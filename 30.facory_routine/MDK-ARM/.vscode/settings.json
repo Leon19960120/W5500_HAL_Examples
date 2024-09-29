@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "wizchip_conf.h": "c",
+        "socket.h": "c",
+        "string.h": "c",
+        "httputil.h": "c",
+        "utility.h": "c",
+        "w5100s.h": "c"
+    }
+}

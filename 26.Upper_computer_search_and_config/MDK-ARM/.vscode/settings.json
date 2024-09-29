@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "socket.h": "c",
+        "wizchip_conf.h": "c",
+        "uppercomputersearch.h": "c"
+    }
+}

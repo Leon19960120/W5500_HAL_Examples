@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "velocity_measurement.h": "c",
+        "wizchip_conf.h": "c"
+    }
+}

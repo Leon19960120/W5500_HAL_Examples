@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "wizchip_conf.h": "c",
+        "stdio.h": "c",
+        "stdint.h": "c",
+        "dhcp.h": "c"
+    }
+}

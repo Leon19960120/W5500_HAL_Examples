@@ -1,36 +1,116 @@
-# W5500_HAL_Examples
+1. # W5500_HAL_Examples
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+   #### introduce
 
-#### Software Architecture
-Software architecture description
+   ​	W5500 is a cost-effective Ethernet chip. Its world-unique full-hardware TCPIP protocol stack patented technology solves the access problem of embedded Ethernet. It is simple to use, safe and stable, and is the preferred solution for Internet of Things devices. WIZnet provides complete supporting materials and real-time and thoughtful technical support services, which greatly shortens the product 	       
 
-#### Installation
+   ​	development cycle and fully guarantees the timely implementation of customer projects. The routine is driven by the STM32F103VCT6 + HAL library, which covers the use of most Ethernet protocols on the W5500.
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+   #### Routine description
 
-#### Instructions
+   1.Network_install：Standard driver routine
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+   2.DHCP：Obtain network configuration information from the server through DHCP.
 
-#### Contribution
+   3.TCP Client：Perform a data loopback test with the server in the manner of a TCP client.
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+   4.TCP Server：As a TCP server, echo back the data sent by the loopback client.
+
+   5.UDP：Loop back the received data in UDP mode.
+
+   6.UDP_Multicast：Communicate in UDP multicast mode.
+
+   7.DNS：Resolve the IP address of wiznet.io through DNS.
+
+   8.HTTP Client：HTTP request initiation example
+
+   9.HTTP_Server：As an HTTP server, handle client requests.
+
+   10.SNTP：Obtain network time.
+
+   11.SMTP：Quickly send emails via the SMTP protocol.
+
+   12.NetBIOS：Through the NetBIOS protocol, other users can initiate ping requests in a format similar to domain names.
+
+   13.UPnP：Quickly control devices through the UPnP protocol.
+
+   14.TFTP：Connect to the TFTP server as a client to download files.
+
+   15.SNMP：Manage network devices via SNMP protocol
+
+   16.PING：PING devices in IPRAW mode
+
+   17.ARP：Hardware ARP example
+
+   18.FTP_Server：FTP server mode example. Other devices can download files by accessing the server.
+
+   19.FTP_Client：Example of FTP client side mode with access to an FTP server to download files
+
+   20.WOL：Wake up devices via network.
+
+   21.Low_Power：Software controls PHY mode.
+
+   22.MQTT&Aliyun：Connect to Alibaba Cloud platform and realize data interaction through MQTT protocol
+
+   23.MQTT_OneNET：Connect to the OneNET platform through the MQTT protocol and realize data interaction.
+
+   24.TCP_Client_Multi_socket：Open all socket connections to the TCP server.
+
+   25.TCP_Server_Multi_socket：As a TCP server, it allows multiple devices to connect for data communication.
+
+   26.Upper_computer_search_and_config：Find the device and modify the network configuration through the host computer
+
+   27.interrupt：Interrupt loopback data example
+
+   28.velocity_measurement：Ethernet speed measurement example
+
+   29.Modbus_TCP_Server：Modbus TCP Server example
+
+   30.facory_routine：DHCP + HTTP Server + NetBIOS example
 
 
-#### Gitee Feature
+   #### Routine directory introduction
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+   ├─Core                                                                                                                  
+   │  ├─Inc                                                         Header file directory                                                       
+   │  └─Src                                                         Source file directory                                                       
+   ├─Drivers                                                      Device driver directory                                           
+   ├─MDK-ARM                                                 Keil project directory                                                              
+   │  ├─Project                                                  Generate table of contents                                                          
+   └─User                                                          User folder                                                       
+       ├─ioLibrary_Driver                                  Ethernet driver library                                                                 
+       ├─user_main                                            user main program                                                             
+       ├─wiz_interface                                       Ethernet interface                                                            
+       └─wiz_platform                                       Hardware platform adapts Ethernet directory.
+
+   #### Porting instructions
+
+   1.  Add all User directories to the project, call the user_run program in the user_main file after hardware initialization 
+   2.   Adapt the relevant interfaces in the wiz_platform .c file 
+   3.   Test and verify
+
+   #### Troubleshooting
+
+   1.  Confirm whether the SPI read and write is correct and whether it can be read to the chip version normally. 
+   2.  Confirm whether the PHY status is normal. 
+   3.  Check whether the set network address and the read-back network address are consistent. 
+   4.  In the same network environment, ping the chip to see if it can be pinged (if it cannot be pinged, please turn off the firewall and check whether there is an address conflict (static configuration network information). 
+   5.  The application protocol is not available. It is recommended to confirm that the environment is set up normally first, and then run the routine test.
+
+
+   #### Technical Support
+
+   1.  Email：support_wiznet@126.com
+   2.  WeChat：support_wiznet
+
+   #### Related information
+
+   website：wiznet.io
+
+   github:[WIZnet (github.com)](https://github.com/Wiznet/)
+
+   gitee:[WIZnet HK (wiznet-hk) - Gitee.com](https://gitee.com/wiznet-hk)
+
+   CSDN：https://blog.csdn.net/WIZnet2012
+
+   BiliBili：[WIZnet_HK的个人空间-WIZnet_HK个人主页-哔哩哔哩视频 (bilibili.com)](https://space.bilibili.com/3493140098976365)
