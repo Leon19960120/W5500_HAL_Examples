@@ -6,7 +6,6 @@
 *
 ******************************************************************************
 */
-#include "w5500.h"
 #include "wizchip_conf.h"
 #include "utility.h"
 #include "types.h"

@@ -274,7 +274,7 @@ uint8_t ftpc_run(uint8_t *dbuf)
 				}
 			}
 			printf("Rcvd Command: %s\r\n", dbuf);
-			proc_ftpc((char *)dbuf);
+			proc_ftpc((char *)dbuf, size);
 		}
 		break;
 	case SOCK_CLOSE_WAIT:
@@ -569,93 +569,121 @@ uint8_t ftpc_run(uint8_t *dbuf)
 	return 0;
 }
 
-char proc_ftpc(char *buf)
+char proc_ftpc(char *buf, uint16_t len)
 {
-	uint16_t Responses;
+	uint16_t Responses[3] = {0};
+	uint16_t i = 0;
+	uint8_t j = 0;
+	uint8_t k;
 	uint8_t dat[30] = {
 		0,
 	};
 	uint8_t buff[30];
-
-	Responses = (buf[0] - '0') * 100 + (buf[1] - '0') * 10 + (buf[2] - '0');
-
-	switch (Responses)
+	while (i < len)
 	{
-	case R_220: /* Service ready for new user. */
-		printf("\r\nInput your User ID > ");
-		scanf("%s", buff);
-		sprintf((char *)dat, "USER %s\r\n", buff);
-		printf("\r\nUser ID:%s\r\n", buff);
-		send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
-		break;
-
-	case R_331: /* User name okay, need password. */
-		printf("\r\nInput your Password > ");
-		scanf("%s", buff);
-		sprintf((char *)dat, "PASS %s\r\n", buff);
-		printf("\r\nPassword:%s\r\n", buff);
-		send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
-		break;
-	case R_230: /* User logged in, proceed */
-		printf("\r\nUser logged in, proceed\r\n");
-
-		sprintf((char *)dat, "TYPE %c\r\n", TransferAscii);
-		ftpc.type = ASCII_TYPE;
-		send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
-		break;
-	case R_200:
-		if ((ftpc.dsock_mode == ACTIVE_MODE) && gModeActivePassiveflag)
+		if ((buf[i] >= '0') & (buf[i] <= '9'))
 		{
-			ftpc.dsock_state = DATASOCK_READY;
-			gModeActivePassiveflag = 0;
+			if (((buf[i] >= '0') & (buf[i] <= '9')) & ((buf[i+1] >= '0') & (buf[i+1] <= '9')) & ((buf[i+2] >= '0') & (buf[i+2] <= '9')) & (buf[i+3] == ' '))
+			{
+				Responses[j] = (buf[i] - '0') * 100 + (buf[i + 1] - '0') * 10 + (buf[i + 2] - '0');
+				j++;
+			}
+			i += 3;
 		}
 		else
 		{
-			gMenuStart = 1;
+			i++;
 		}
-		break;
-	case R_150:
-		switch (Command.First)
+	}
+	for (k = 0; k < j; k++)
+	{
+		switch (Responses[k])
 		{
-		case f_dir:
-			Command.First = f_nocmd;
-			Command.Second = s_dir;
-			gDataPutGetStart = 1;
-			break;
-		case f_get:
-			Command.First = f_nocmd;
-			Command.Second = s_get;
-			gDataPutGetStart = 1;
-			break;
-		case f_put:
-			Command.First = f_nocmd;
-			Command.Second = s_put;
-			gDataPutGetStart = 1;
-			break;
-		default:
-			printf("Command.First = default\r\n");
-			break;
+
+			case R_530:
+				printf("\r\nLogin failed, please check your ID and Password.\r\n");
+			case R_220: /* Service ready for new user. */
+				printf("\r\nInput your User ID > ");
+				scanf("%s", buff);
+				sprintf((char *)dat, "USER %s\r\n", buff);
+				send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
+				break;
+
+			case R_331: /* User name okay, need password. */
+				printf("\r\nInput your Password > ");
+				scanf("%s", buff);
+				sprintf((char *)dat, "PASS %s\r\n", buff);
+				send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
+				break;
+			case R_230: /* User logged in, proceed */
+				printf("\r\nUser logged in, proceed\r\n");
+
+				sprintf((char *)dat, "TYPE %c\r\n", TransferAscii);
+				ftpc.type = ASCII_TYPE;
+				send(socket_ctrl, (uint8_t *)dat, strlen((char *)dat));
+				break;
+			case R_200:
+				if ((ftpc.dsock_mode == ACTIVE_MODE) && gModeActivePassiveflag)
+				{
+					ftpc.dsock_state = DATASOCK_READY;
+					gModeActivePassiveflag = 0;
+				}
+				else
+				{
+					gMenuStart = 1;
+				}
+				break;
+			case R_125:
+			case R_150:
+				switch (Command.First)
+				{
+				case f_dir:
+					Command.First = f_nocmd;
+					Command.Second = s_dir;
+					gDataPutGetStart = 1;
+					break;
+				case f_get:
+					Command.First = f_nocmd;
+					Command.Second = s_get;
+					gDataPutGetStart = 1;
+					break;
+				case f_put:
+					Command.First = f_nocmd;
+					Command.Second = s_put;
+					gDataPutGetStart = 1;
+					break;
+				default:
+					printf("Command.First = default\r\n");
+					break;
+				}
+				break;
+			case R_226:
+				gMenuStart = 1;
+				break;
+			case R_227:
+				if (pportc(buf) == -1)
+				{
+					printf("Bad port syntax\r\n");
+				}
+				else
+				{
+					printf("Go Open Data Sock...\r\n ");
+					ftpc.dsock_mode = PASSIVE_MODE;
+					ftpc.dsock_state = DATASOCK_READY;
+				}
+				break;
+			case R_425:
+				printf("Active mode request failed, switching to passive mode\r\n");
+				ftpc.dsock_mode = PASSIVE_MODE;
+				gDataSockReady = 0;
+				close(socket_data);
+				gMenuStart = 1;
+				break;
+			default:
+				printf("\r\nDefault Status = %d\r\n", (uint16_t)Responses[k]);
+				gDataSockReady = 1;
+				break;
 		}
-		break;
-	case R_226:
-		gMenuStart = 1;
-		break;
-	case R_227:
-		if (pportc(buf) == -1)
-		{
-			printf("Bad port syntax\r\n");
-		}
-		else
-		{
-			printf("Go Open Data Sock...\r\n ");
-			ftpc.dsock_mode = PASSIVE_MODE;
-			ftpc.dsock_state = DATASOCK_READY;
-		}
-		break;
-	default:
-		printf("\r\nDefault Status = %d\r\n", (uint16_t)Responses);
-		gDataSockReady = 1;
-		break;
 	}
 	return 1;
 }

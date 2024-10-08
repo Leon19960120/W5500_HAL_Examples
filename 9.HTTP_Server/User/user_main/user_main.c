@@ -27,7 +27,11 @@ wiz_NetInfo default_net_info = {
 static uint8_t ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {0};
 static uint8_t http_tx_ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {0};
 static uint8_t http_rx_ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {0};
+#if (_WIZCHIP_ == W5500)
 static uint8_t socknumlist[] = {0, 1, 2, 3, 4, 5, 6, 7};
+#elif (_WIZCHIP_ == W5100S)
+static uint8_t socknumlist[] = {0, 1, 2, 3};
+#endif
 /**
  * @brief   User Run Program
  * @param   none

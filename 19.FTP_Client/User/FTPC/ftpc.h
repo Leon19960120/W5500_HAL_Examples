@@ -48,6 +48,7 @@ extern "C"
 #endif
 
 /* FTP Responses */
+#define R_125 125 /* Data connection already open; transfer starting */
 #define R_150 150 /* File status ok; opening data conn */
 #define R_200 200 /* 'Generic' command ok */
 #define R_220 220 /* Service ready for new user. */
@@ -55,6 +56,8 @@ extern "C"
 #define R_227 227 /* Entering passive mode (h1,h2,h3,h4,p1,p2) */
 #define R_230 230 /* User logged in, proceed */
 #define R_331 331 /* User name okay, need password. */
+#define R_425 425 /* ACTIVE mode request failed, please switch to PASSIVE mode */
+#define R_530 530 /* User name okay, need login password. */
 
 #define TransferAscii 'A'
 #define TransferBinary 'I'
@@ -125,7 +128,7 @@ extern "C"
 
 	void ftpc_init(uint8_t *src_ip, uint8_t sn_ctrl, uint8_t sn_data);
 	uint8_t ftpc_run(uint8_t *dbuf);
-	char proc_ftpc(char *buf);
+	char proc_ftpc(char *buf, uint16_t len);
 	int pportc(char *arg);
 	uint8_t *User_Keyboard_MSG(void);
 

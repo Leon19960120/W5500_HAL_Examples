@@ -2,7 +2,7 @@
 #define _SMTPUTIL_H_
 
 #include "socket.h"
-#include "w5500.h"
+#include "wizchip_conf.h"
 // SMTP_STATE
 
 enum run_state

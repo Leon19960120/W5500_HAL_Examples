@@ -27,8 +27,13 @@ wiz_NetInfo default_net_info = {
 
 static uint16_t tcps_port = 8000;
 static uint16_t udps_port = 5000;
+#if (_WIZCHIP_ == W5100S)
+static uint8_t tx_size[_WIZCHIP_SOCK_NUM_] = {4, 2, 2, 0};
+static uint8_t rx_size[_WIZCHIP_SOCK_NUM_] = {4, 2, 2, 0};
+#elif (_WIZCHIP_ == W5500)
 static uint8_t tx_size[_WIZCHIP_SOCK_NUM_] = {4, 4, 2, 1, 1, 1, 1, 2};
 static uint8_t rx_size[_WIZCHIP_SOCK_NUM_] = {4, 4, 2, 1, 1, 1, 1, 2};
+#endif
 static uint8_t ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {0};
 
 /**

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "socket.h"
-#include "w5500.h"
 #include "smtp.h"
 #include <stdlib.h>
 
