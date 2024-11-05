@@ -178,7 +178,7 @@ void do_arp(uint8_t sn, uint8_t *buf, uint8_t *dest_ip)
             else
             {
                 cnt++;
-                wiz_delay_ms(5);
+                wiz_user_delay_ms(5);
             }
         }
         break;

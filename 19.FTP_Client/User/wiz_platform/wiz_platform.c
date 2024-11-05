@@ -81,11 +81,11 @@ void wizchip_read_buff(uint8_t *buf, uint16_t len)
 void wizchip_reset(void)
 {
     HAL_GPIO_WritePin(RSTn_GPIO_Port, RSTn_Pin, GPIO_PIN_SET);
-    wiz_delay_ms(10);
+    wiz_user_delay_ms(10);
     HAL_GPIO_WritePin(RSTn_GPIO_Port, RSTn_Pin, GPIO_PIN_RESET);
-    wiz_delay_ms(10);
+    wiz_user_delay_ms(10);
     HAL_GPIO_WritePin(RSTn_GPIO_Port, RSTn_Pin, GPIO_PIN_SET);
-    wiz_delay_ms(10);
+    wiz_user_delay_ms(10);
 }
 
 /**

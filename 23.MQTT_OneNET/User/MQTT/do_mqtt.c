@@ -239,7 +239,7 @@ void do_mqtt(void)
         {
             run_status = ERR;
         }
-        wiz_delay_ms(100);
+        wiz_user_delay_ms(100);
     }
     case RECV:
     {
@@ -248,12 +248,12 @@ void do_mqtt(void)
             mqtt_recv_flag = 0;
             json_decode(mqtt_recv_msg);
         }
-        wiz_delay_ms(100);
+        wiz_user_delay_ms(100);
         break;
     }
     case ERR: /* Running error */
         printf("system ERROR!");
-        wiz_delay_ms(1000);
+        wiz_user_delay_ms(1000);
         break;
 
     default:

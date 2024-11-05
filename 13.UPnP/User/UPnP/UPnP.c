@@ -127,7 +127,7 @@ signed char GetDescriptionProcess(
         socket(sockfd,Sn_MR_TCP,PORT_UPNP,Sn_MR_ND);/*打开socket的一个端口*/
         while(getSn_SR(sockfd)!=SOCK_INIT);
         {
-           wiz_delay_ms(100); 
+           wiz_user_delay_ms(100); 
         }
         
         if(connect(sockfd, (unsigned char*)&ipaddr, port)==0)
@@ -139,7 +139,7 @@ signed char GetDescriptionProcess(
 
 	// Receive Reply
 	memset(recv_buffer, '\0', RECV_BUFFER_SIZE);
-	wiz_delay_ms(500);
+	wiz_user_delay_ms(500);
 	endTime = my_time + 3;
 	while (recv(sockfd, (void *)recv_buffer, RECV_BUFFER_SIZE) <= 0 && my_time < endTime);	// Check Receive Buffer of W5200
 	if(my_time >= endTime){	// Check Timeout
@@ -192,7 +192,7 @@ signed char SetEventing(
         socket(sockfd,Sn_MR_TCP,PORT_UPNP,Sn_MR_ND);/*打开socket的一个端口*/
         while(getSn_SR(sockfd)!=SOCK_INIT);
         {
-           wiz_delay_ms(100); 
+           wiz_user_delay_ms(100); 
         }
         
         if(connect(sockfd, (unsigned char*)&ipaddr, port)==0)
@@ -204,7 +204,7 @@ signed char SetEventing(
 
 	// Receive Reply
 	memset(recv_buffer, '\0', RECV_BUFFER_SIZE);
-	wiz_delay_ms(500);
+	wiz_user_delay_ms(500);
 	endTime = my_time + 3;
 	while (recv(sockfd, (void *)recv_buffer, RECV_BUFFER_SIZE) <= 0 && my_time < endTime);	// Check Receive Buffer of W5200
 	if(my_time >= endTime){	// Check Timeout
@@ -238,7 +238,7 @@ void eventing_listener(
                   listen(sockfd);
                   break;
                 case SOCK_ESTABLISHED:					/* if connection is established */
-			wiz_delay_ms(500);
+			wiz_user_delay_ms(500);
 			if((len = getSn_RX_RSR(sockfd)) > 0){
 				recv(sockfd, (void *)recv_buffer, len);
 				send(sockfd, (void *)HTTP_OK, strlen((void *)HTTP_OK));
@@ -317,7 +317,7 @@ signed short DeletePortProcess(
 
 	// Receive Reply
 	memset(recv_buffer, '\0', RECV_BUFFER_SIZE);
-	wiz_delay_ms(500);
+	wiz_user_delay_ms(500);
 	endTime = my_time + 3;
 	while (recv(sockfd, (void *)recv_buffer, RECV_BUFFER_SIZE) <= 0 && my_time < endTime);	// Check Receive Buffer of W5200
 	if(my_time >= endTime){	// Check Timeout
@@ -388,7 +388,7 @@ signed short AddPortProcess(
 
 	// Receive Reply
 	memset(recv_buffer, '\0', RECV_BUFFER_SIZE);
-	wiz_delay_ms(500);
+	wiz_user_delay_ms(500);
 	endTime = my_time + 3;
 	while (recv(sockfd, (void *)recv_buffer, RECV_BUFFER_SIZE) <= 0 && my_time < endTime);	// Check Receive Buffer of W5200
 	if(my_time >= endTime){	// Check Timeout

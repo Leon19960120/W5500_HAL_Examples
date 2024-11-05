@@ -75,7 +75,7 @@ void ping_count(uint8_t s, uint16_t pCount, uint8_t *addr)
 				else
 				{
 					cnt++;
-					wiz_delay_ms(5);
+					wiz_user_delay_ms(5);
 				}
 			}
 			break;

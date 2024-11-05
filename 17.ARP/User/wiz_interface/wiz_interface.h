@@ -29,7 +29,7 @@ void wiz_timer_handler(void);
  * @brief Delay function in milliseconds
  * @param nms :Delay Time
  */
-void wiz_delay_ms(uint32_t nms);
+void wiz_user_delay_ms(uint32_t nms);
 
 /**
  * @brief   wizchip init function

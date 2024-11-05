@@ -53,7 +53,7 @@ void user_run(void)
 
   printf("The current Mbtis speed : %d\r\n", get_conf.speed == PHY_SPEED_100 ? 100 : 10);
   printf("The current Duplex Mode : %s\r\n", get_conf.duplex == PHY_DUPLEX_HALF ? "Half-Duplex" : "Full-Duplex");
-  wiz_delay_ms(10000);
+  wiz_user_delay_ms(10000);
   /* setting phy 10M and half-duplex mode */
   printf("setting phy 10M and half-duplex mode\r\n");
   phy_conf.speed = PHY_SPEED_10;
@@ -63,7 +63,7 @@ void user_run(void)
 
   printf("The current Mbtis speed : %d\r\n", get_conf.speed == PHY_SPEED_100 ? 100 : 10);
   printf("The current Duplex Mode : %s\r\n", get_conf.duplex == PHY_DUPLEX_HALF ? "Half-Duplex" : "Full-Duplex");
-  wiz_delay_ms(10000);
+  wiz_user_delay_ms(10000);
   /* setting phy low power mode */
   printf("setting phy low power mode\r\n");
   wizphy_setphypmode(PHY_POWER_DOWN);

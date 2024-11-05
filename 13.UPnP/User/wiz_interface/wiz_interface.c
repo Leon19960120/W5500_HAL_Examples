@@ -119,7 +119,7 @@ void wiz_timer_handler(void)
  * @brief Delay function in milliseconds
  * @param nms :Delay Time
  */
-void wiz_delay_ms(uint32_t nms)
+void wiz_user_delay_ms(uint32_t nms)
 {
     wiz_delay_ms_count = 0;
     while (wiz_delay_ms_count < nms)
@@ -135,7 +135,7 @@ void wizchip_version_check(void)
     uint8_t error_count = 0;
     while (1)
     {
-        wiz_delay_ms(1000);
+        wiz_user_delay_ms(1000);
         if (getVERSIONR() != W5500_VERSION)
         {
             error_count++;
@@ -172,7 +172,7 @@ void wiz_phy_link_check(void)
     uint8_t phy_link_status;
     do
     {
-        wiz_delay_ms(1000);
+        wiz_user_delay_ms(1000);
         ctlwizchip(CW_GET_PHYLINK, (void *)&phy_link_status);
         if (phy_link_status == PHY_LINK_ON)
         {
