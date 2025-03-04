@@ -46,7 +46,7 @@ static uint8_t socknumlist[] = {0, 1, 2};
  */
 void user_run(void)
 {
-  printf("wizchip HTTP Server example\r\n");
+  printf("wizchip HTTP Server and NetBIOS example\r\n");
 
   /* wizchip init */
   wizchip_initialize(); // wizchip init function
