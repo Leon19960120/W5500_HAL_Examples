@@ -10,9 +10,9 @@
 
 2.DHCP：通过DHCP方式从服务器获取网络配置信息
 
-3.TCP Client：以TCP客户端的方式和服务器进行数据回环测试
+3.TCP_Client：以TCP客户端的方式和服务器进行数据回环测试
 
-4.TCP Server：作为TCP服务器，回环客户端发来的数据
+4.TCP_Server：作为TCP服务器，回环客户端发来的数据
 
 5.UDP：以UDP方式回环接收到的数据
 
@@ -20,7 +20,7 @@
 
 7.DNS：通过DNS解析wiznet.io的IP地址
 
-8.HTTP Client：HTTP发起请求示例
+8.HTTP_Client：HTTP发起请求示例
 
 9.HTTP_Server：作为HTTP服务器，处理客户端请求
 
@@ -46,11 +46,11 @@
 
 20.WOL：通过网络唤醒设备
 
-21.Low_Power：软件控制PHY模式
+21.PHY_Mode_Config：软件控制PHY模式
 
 22.MQTT&Aliyun：通过MQTT协议连接阿里云平台并实现数据交互
 
-23.MQTT_OneNET：通过MQTT协议连接OneNET平台并实现数据交互
+23.MQTT&OneNET：通过MQTT协议连接OneNET平台并实现数据交互
 
 24.TCP_Client_Multi_socket：开启全部socket连接TCP服务器
 
@@ -60,11 +60,11 @@
 
 27.interrupt：中断回环数据示例
 
-28.velocity_measurement：以太网测速示例
+28.Ethernet_Rate_Test：以太网测速示例
 
 29.Modbus_TCP_Server：Modbus TCP示例
 
-30.facory_routine：DHCP+HTTP Server+NetBIOS示例
+30.HTTP_Server&NetBIOS：DHCP+HTTP Server+NetBIOS示例
 
 
 #### 例程目录介绍
