@@ -46,7 +46,6 @@ static uint8_t socknumlist[] = {0, 1, 2};
  */
 void user_run(void)
 {
-	wiz_NetInfo net_info;
   printf("wizchip HTTP Server example\r\n");
 
   /* wizchip init */
@@ -58,8 +57,7 @@ void user_run(void)
 	reg_httpServer_webContent((uint8_t *)"index.html", (uint8_t *)index_page); // Build HTTP server web pages
 	httpServer_init(http_tx_ethernet_buf, http_rx_ethernet_buf, _WIZCHIP_SOCK_NUM_-1, socknumlist);  // Initializing the HTTP server
 	
-	wizchip_getnetinfo(&net_info);
-	printf("Please enter% d.% d.% d.% d in your browser to access the HTTP server\r\n",net_info.ip[0],net_info.ip[1],net_info.ip[2],net_info.ip[3]);
+	printf("Please enter /WIZNET in your browser to access the HTTP server\r\n");
   while (1)
 	{
 		int i;
