@@ -56,7 +56,7 @@ void user_run(void)
   network_init(ethernet_buf, &default_net_info);
 	
 	reg_httpServer_webContent((uint8_t *)"index.html", (uint8_t *)index_page); // Build HTTP server web pages
-	httpServer_init(http_tx_ethernet_buf, http_rx_ethernet_buf, _WIZCHIP_SOCK_NUM_, socknumlist);  // Initializing the HTTP server
+	httpServer_init(http_tx_ethernet_buf, http_rx_ethernet_buf, _WIZCHIP_SOCK_NUM_-1, socknumlist);  // Initializing the HTTP server
 	
 	wizchip_getnetinfo(&net_info);
 	printf("Please enter% d.% d.% d.% d in your browser to access the HTTP server\r\n",net_info.ip[0],net_info.ip[1],net_info.ip[2],net_info.ip[3]);

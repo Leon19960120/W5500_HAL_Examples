@@ -5,7 +5,7 @@
 #include "wizchip_conf.h"
 #include "netbios.h"
 
-#define NETBIOS_W5500_NAME "WIZNET" // Define the NetBIOS name
+#define NETBIOS_NAME "WIZNET" // Define the NetBIOS name
 
 #define NETBIOS_PORT 137 // The default port for the NetBIOS name service
 
@@ -284,7 +284,7 @@ void do_netbios(uint8_t sn)
         netbios_name_decoding((char *)(netbios_name_hdr->encname), netbios_name, sizeof(netbios_name));
         printf("name is %s\r\n", netbios_name);
         // If the query is made against the native Netbios
-        if (strcmp(netbios_name, NETBIOS_W5500_NAME) == 0)
+        if (strcmp(netbios_name, NETBIOS_NAME) == 0)
         {
           uint8_t ip_addr[4];
           NETBIOS_RESP *resp = (NETBIOS_RESP *)netbios_tx_buf;
