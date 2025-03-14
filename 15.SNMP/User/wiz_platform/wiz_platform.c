@@ -129,7 +129,7 @@ void wiz_tim_irq_enable(void)
  */
 void wiz_tim_irq_disable(void)
 {
-    HAL_TIM_Base_Start_IT(&htim2);
+    HAL_TIM_Base_Stop_IT(&htim2);
 }
 
 /**
