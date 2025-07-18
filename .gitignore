@@ -48,6 +48,7 @@
 *.i*86
 *.x86_64
 *.hex
+*.bin
 
 # Debug files
 *.dSYM/
@@ -70,3 +71,4 @@ Project.uvguix.Jian
 DebugConfig
 RTE
 !29.Modbus_TCP_Server/
+!ConfigTool_Nuri.exe
