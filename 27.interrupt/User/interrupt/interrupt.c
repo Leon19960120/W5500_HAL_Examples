@@ -102,6 +102,8 @@ void loopback_tcps_interrupt(uint8_t sn, uint8_t *buf, uint16_t port)
         printf("%d:Socket disconnected\r\n", sn);
         if ((getSn_RX_RSR(sn)) > 0)
         {
+            len = getSn_RX_RSR(sn);
+
             if (len > ETHERNET_BUF_MAX_SIZE)
             {
                 len = ETHERNET_BUF_MAX_SIZE;
@@ -132,8 +134,10 @@ void loopback_tcps_interrupt(uint8_t sn, uint8_t *buf, uint16_t port)
 #elif (_WIZCHIP_ == W5500)
         setIMR(0xff);
 #endif
-        if ((len = getSn_RX_RSR(sn)) > 0)
+        if ((getSn_RX_RSR(sn)) > 0)
         {
+            len = getSn_RX_RSR(sn);
+
             if (len > ETHERNET_BUF_MAX_SIZE)
             {
                 len = ETHERNET_BUF_MAX_SIZE;
